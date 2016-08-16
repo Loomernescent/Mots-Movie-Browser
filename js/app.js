@@ -62,11 +62,44 @@ var data = {
 					 "This is the only movie I recall watching in the cinema and being desperate for it to end. I mean I didn't like sister act much as a 10 year old but it served as some sort of C-grade entertainment. On paper it looked good, but Tom Waits, Iggy Pop, Steve Buscemi Bill Murray and Steven Wright among many others couldn't save me from total and utter boredom. Absolute shit!.",	
 					 "Friends fall in love whilst making a porno movie. If it didn't try to be a romance story and just wallowed in its own crass and nasty premise it might've worked, but no it tries and splat! Its just a mess."	]
 		}
-	};  // end motsFavs object
+	},  // end motsFavs object
+
+	init: function() {
+
+	}
 	
 }; // end data object
 
 var controller = {
+		init: function() {
+
+		},
+
+		searchRequest: function(search) {
+		
+		var omdbAPI = "http://www.omdbapi.com/?";
+		var omdbOptions = {
+			t: search,
+			plot: "short",
+			r: "json"
+		};
+		function displayMovies(data) {
+			if(data.Error == "Movie not found!") {
+				$('#search').val("");
+				$('#search').attr("placeholder", "...Sorry Movie not found");
+			} else {
+			var searchMoviesList = new MovieList();
+			var omdbPoster = 'http://img.omdbapi.com/?i=' + data.imdbID + '&apikey=6c024fcd';
+			searchResult = new Movie(omdbPoster, data.Title, data.Year, data.Director, data.Actors, data.Runtime, data.Genre, data.imdbRating, data.Plot, "search", null);
+			searchMoviesList.add(searchResult);
+			$('#status').html('<h3>Search results</h3>');
+			searchMoviesList.render(displayList);
+			}
+		}
+
+	$.getJSON(omdbAPI, omdbOptions, displayMovies);
+	console.log(search);	
+};
 
 
 //// HELPER FUNCTIONS /////
@@ -110,5 +143,17 @@ uniqueRandomNum: function(arr, tot, max) {
 
 
 var ui = {
+	init: function() {
+		this.displayList = document.getElementById("displayList");
+		this.modal = document.getElementById("trailerModal");
+
+
+		this.favButtonArray = [];
+		controller.uniqueRandomNum(favButtonArray, 4, 9)
+	}
 
 }; //end ui object
+
+
+
+controller.intt(); //start app
