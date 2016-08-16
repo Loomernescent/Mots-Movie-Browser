@@ -1,0 +1,17 @@
+@import "icons/*.png";
+
+$icons-sprite-dimensions: true;
+
+@include all-icons-sprites;
+
+.social a {
+	display: block;
+	width: 32px;
+	height: 32px;
+}
+
+@media #{$small-only} { 
+	.small-icons { // overriding all sprites
+	  @include resize-sprite-set($icons-sprites, 75); // 50% sized
+	}
+}

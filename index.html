@@ -1,0 +1,187 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Mots Movie Browser">
+    <meta name="keywords" content="Movies, film, cinema, australian, reviews, OMDB">    
+    <title>Mots Movies</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <script src="js/modernizr.min.js"></script>
+  </head>
+  <body>
+    <div id="root"> <!--  root for sticky footer -->
+      <header>
+        <div class="row">
+          <div class="large-12 columns">
+            <a href="index.html"><h1>Mots Movie Browser</h1></a>
+            <ul class="social show-for-small-only">
+              <li class="small-icons"><a href="http://www.facebook.com/motbollox" class="icons-facebook"></a></li>
+              <li class="small-icons"><a href="http://www.twitter.com/cochlearkill" class="icons-twitter"></a></li>
+              <li class="small-icons"><a href="https://github.com/Loomernescent" class="icons-github"></a></li>            
+            </ul>
+            <ul class="social show-for-medium-up">
+              <li><a href="http://www.facebook.com/motbollox" class="icons-facebook"></a></li>
+              <li><a href="http://www.twitter.com/cochlearkill" class="icons-twitter"></a></li>
+              <li><a href="https://github.com/Loomernescent" class="icons-github"></a></li>               
+            </ul>
+          </div>
+        </div>
+        <div class="fullwidth">
+          <div class="control large-10 large-centered columns">
+            <div class="row small-centered collapse prefix-radius">
+              <nav class="top-bar" data-topbar role="navigation">
+                <ul class="title-area">
+                  <li class="name show-for-medium-up">
+                    <h1><a href="index.html"><span class="icon-home3"></span></a></h1>
+                  </li>
+                   <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                  <li class="toggle-topbar"><a href="#"><span></span></a></li>
+                 
+                </ul>
+
+                <section class="top-bar-section">
+                  <!-- Left Nav Section -->
+                  <ul  class="left">
+                    <li class="has-dropdown">
+                      <a href="#"><span class="icon-menu"></span></a>
+                      <ul class="dropdown">
+                        <li class="has-dropdown"><a href="#">Favourites</a>
+                          <ul class="dropdown">
+                            <li><a class="nav-link">Animated</a></li>
+                            <li><a class="nav-link">Australian</a></li>
+                            <li><a class="nav-link">Biography</a></li>
+                            <li><a class="nav-link">Comedy</a></li>
+                            <li><a class="nav-link">Drama</a></li>
+                            <li><a class="nav-link">Dystopian</a></li>
+                            <li><a class="nav-link">Music</a></li>
+                            <li><a class="nav-link">Sci-Fi</a></li>
+                            <li><a class="nav-link">Thriller</a></li>
+                            <li><a class="nav-link">War</a></li>                                           
+                          </ul>
+                        </li>
+                        <li><a class="stinkButton">Stinkers</a></li>
+                      </ul>
+                    </li>                   
+                  </ul>
+                 <!-- Right Nav Section -->                
+                  <ul id="searcher" class="right">
+                    <li class="has-form hide-for-small-only">
+                      <div class="row collapse">
+                        <div class="small-9 columns">
+                          <input class="search-bar" id="search" type="text" placeholder="Search the movie database">
+                        </div>
+                        <div class="small-3 columns">
+                          <a id="go" href="#" class="success button expand">Go</a>
+                        </div>
+                      </div>
+                    </li>
+  <!--                   <li class="active"><a href="#">Right Button Active</a></li> -->
+
+                  </ul>
+                </section>
+              </nav>
+            </div>
+          </div>
+        </div>   
+      </header>
+
+      
+      <div class="row content"> <!--  content -->
+        <div id="status" class="text-center">
+          <div id="mobileHero" class="show-for-small-only">
+              <h2>Search</h2>
+              <h3>The Online Movie Database</h3>
+          </div>
+
+          <ul class="example-orbit-content hide-for-small-only" data-orbit>
+            <li data-orbit-slide="headline-1">
+              <div id="slide1" class="slideDiv">
+                <h2>Search</h2>
+                <h3>The Online Movie Database</h3>
+              </div>
+            </li>
+            <li data-orbit-slide="headline-2">
+              <div id="slide2" class="slideDiv">
+                <h2>The Stink List</h2>
+                <h3>I dont often walk out of a movie....</h3>
+                <a id="stinkButton" href="#" class="stinkButton button small radius alert">Stinkers</a>                
+              </div>
+            </li>
+            <li data-orbit-slide="headline-3">
+              <div id="slide3" class="slideDiv">
+                <h2>Mots Favourites</h2>
+                <h3>Blockbusters, classics and some obscure gems</h3>
+              </div>
+            </li>
+          </ul>
+  <!--         <h3>Mots Favourite Movies by Genre</h3> -->
+        </div>
+        <div id="displayList" class="panel large-12 columns">
+          <h3>Mots Favourites by Genre</h3>
+          <div class="columns large-3 small-6 favlist nav-link"></div>
+          <div class="columns large-3 small-6 favlist nav-link"></div>
+          <div class="columns large-3 small-6 favlist nav-link"></div>
+          <div class="columns large-3 small-6 favlist nav-link"></div>
+        </div>
+      </div>  <!-- end content   -->
+
+      <div class="root-footer"></div>
+
+    </div> <!-- end root -->
+    <div class="footer">
+      <div><h6 class="copyright">&#169;2016 Mots Movie Browser</h6><span class="loomer">Website by<a href="mailto:talk@loomernescent.com">Loomernescent</a></span></div>
+      <div class="omdb" ><p class="title">Powered by the <a href="http://www.omdbapi.com/">The Open Movie Database</p></h4></div>
+    </div> 
+    
+    <div id="trailerModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">Awesome. I have it.</h2>
+        <p class="lead">Your couch.  It is mine.</p>
+        <p>Im a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+
+
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="bower_components/foundation/js/foundation.min.js"></script>
+    <script src="js/list.js"></script>       
+    <script src="js/movie.js"></script>        
+    <script src="js/engine.js"></script>
+    <script>
+    $(document).foundation({
+      reveal: {
+        animation_speed: 800,
+        data_reset_on_close: true,
+        // data_v_offset: "210px"
+        close_on_background_click: false
+        // data_overlay: "false"  
+        },
+      orbit: {
+        animation_speed: 1800,
+        timer_speed: 4500,
+        pause_on_hover: false,
+        next_on_click: true,
+        slide_number: false,
+        bullets: false, // Does the slider have bullets visible?
+            circular: false,
+        // slide_selector: 'li',
+        navigation_arrows: true
+        },
+      topbar: {
+        sticky_class : 'sticky',
+    //    custom_back_text: true, // Set this to false and it will pull the top level link name as the back text
+        back_text: 'Back', // Define what you want your custom back text to be if custom_back_text: true
+        is_hover: true,
+        mobile_show_parent_link: false, // will copy parent links into dropdowns for mobile navigation
+        scrolltop : true // jump to top when sticky nav menu toggle is clicked
+      }  
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
