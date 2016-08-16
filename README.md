@@ -1,4 +1,12 @@
-# Foundation Compass Template
+#Mots Movie Browser
+
+This project started as an exercise in using AJAX after I completed the AJAX BASICS course on teamtreehouse
+(https://teamtreehouse.com/library/ajax-basics)
+
+It uses The Open Movie Database API (http://www.omdbapi.com/) to create a movie browser with a search function and curated favourites lists. Kind of like a poormans version of IMDB :) 
+
+
+## Foundation Compass Template
 
 The easiest way to get started with Foundation + Compass.
 
