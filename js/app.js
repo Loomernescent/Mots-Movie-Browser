@@ -1,36 +1,29 @@
-var Favourites = function(genre) {
-
-	this.name = genre;
-	console.log(genre);
-	this.pic = motsFavs[genre].pic;
-	this.favouritesList = motsFavs[genre].titles;
-}
-
 var data = {
-
+	motsFavs: null,	
 
 	init: function() {
 		var motsFavs;
 		/// populate are favourites
 		this.favCategory = [];
 		this.ajaxRequest(this.motsFavsData);
-		for (title in motsFavs) {
-			console.log(title);
-		}
+		// for (title in motsFavs) {
+		// 	console.log(title);
+		// }
 
 
 	},
 	motsFavsData: function(returned_data) {
-    	motsFavs = returned_data;
-    	console.log(motsFavs)
-		var genres = Object.keys(motsFavs)
-		console.log(genres);
-		console.log(data.favCategory);
-		genres.forEach(function(genre, index){
-			var favourite = new Favourites(genre);
-			data.favCategory.push(favourite)
-		}, this)
-		console.log(data.favCategory)
+    	data.motsFavs = returned_data;
+    	console.log(data.motsFavs)
+		data.genres = Object.keys(data.motsFavs)
+		console.log(data.genres);
+		// console.log(data.favCategory);
+		// data.genres.forEach(function(genre, index){
+		// 	var favourite = new this.Favourites(genre);
+		// 	data.favCategory.push(favourite)
+		// }, this)
+		// console.log(data.favCategory)
+		ui.init();
 	},
 	// populateFavs: function() {
 
@@ -52,7 +45,13 @@ var data = {
 
 
 		//mots favs data^
+	// Favourites = function(genre) {
 
+	// 	this.name = genre;
+	// 	// console.log(genre);
+	// 	this.pic = this.motsFavs[genre].pic;
+	// 	this.favouritesList = this.motsFavs[genre].titles;
+	// }
 
 
 
@@ -117,6 +116,15 @@ removeSp: function(str) {
 	str = str.replace(/\s/g,'');  
 	return str;
 },
+getFavGenre: function(index) {
+	// console.log(index);
+	// console.log(data.genres)
+	var fav = data.genres[index]; 
+	return fav;
+},
+getMovieData: function() {
+	return data.motsFavs;
+},
 
 // generate random number
 randomNum: function(max) {
@@ -125,8 +133,9 @@ randomNum: function(max) {
 
 /// unique number generator
 uniqueRandomNum: function(arr, tot, max) {
+	console.log(arr)
 	while(arr.length < tot){
-	  var r = randomNum(max)-1
+	  var r = controller.randomNum(max)-1
 	  var found = false;
 	  for(var i=0;i<arr.length;i++) {
 		if(arr[i]== r) {
@@ -142,27 +151,47 @@ uniqueRandomNum: function(arr, tot, max) {
 
 var ui = {
 	init: function() {
+		this.motsFavs = controller.getMovieData();
 		this.displayList = document.getElementById("displayList");
 		this.modal = document.getElementById("trailerModal");
-
-
 		this.favButtonArray = [];
+		this.favButtonsRender();
+
+
+
 		// controller.uniqueRandomNum(favButtonArray, 4, 9)
 	},
 
 	favButtonsRender: function() {
-		for (var i = 0; i < 5; i ++) {
-			console.log(i)
+		controller.uniqueRandomNum(ui.favButtonArray, 4, 9)  // gets 4 random numbers
+
+		console.log(ui.favButtonArray);
+		for (var i = 0; i < 4; i ++) {
 			var favbutton = document.createElement('div');
 			favbutton.classList.add('columns', 'large-3', 'small-6', 'favlist', 'nav-link');
-
-
-
+			var htmlString;
+			var favouriteItem = controller.getFavGenre(ui.favButtonArray[i]);
+			console.log(this.motsFavs[favouriteItem])
+			htmlString = '<div class="wrapper">';
+			htmlString += '<img src="' + this.motsFavs[favouriteItem].pic + '">';
+			htmlString += '<div class="cloak">';
+			htmlString += '<h3>' + favouriteItem + '</h3>';
+			htmlString += '</div></div>';
+			console.log(htmlString)
+			favbutton.innerHTML = htmlString;
+			this.displayList.appendChild(favbutton);
 		}
 	}
 
 }; //end ui object
 
-
+	// Favourites.prototype.toHTML = function() {
+	// 	htmlString = '<div class="wrapper">';
+	// 	htmlString += '<img src="' + this.pic + '">';
+	// 	htmlString += '<div class="cloak">';
+	// 	htmlString += '<h3>' + this.name + '</h3>';
+	// 	htmlString += '</div></div>';
+	// 	return htmlString;
+	// } 
 
 controller.init(); //start app
