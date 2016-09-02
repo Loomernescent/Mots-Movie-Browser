@@ -44,6 +44,33 @@ body {
     content: "\e901";
 }
 
+.AJAXspinner {
+	position: absolute;
+	left: 50px;
+	top: 80px;
+
+	@media #{$small-only} {
+		left: 130px;
+		top: 180px;
+	}
+
+}
+
+.spinner {
+	position: absolute;
+	left: 36%;
+	bottom: 35%;
+
+	@media #{$small-only} {
+		width: 60px;
+	}
+
+	@media #{$medium-only} {
+		left: 40%;
+	}
+
+}
+
 @-webkit-keyframes fontfix {
     from { opacity: 1; }
     to   { opacity: 1; }
@@ -260,7 +287,17 @@ h1 {
 
 .favlist {
 
+
+
 	.wrapper{
+		min-height: 273px;
+		@media #{$small-only} {
+			min-height: 140px;			
+		}
+		@media #{$medium-only} {
+			min-height: 200px;		
+		}
+
 		border: solid 3px $oil;
 		border-radius: 4px;		
 		position: relative;
