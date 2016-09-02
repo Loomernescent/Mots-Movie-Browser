@@ -56,7 +56,6 @@ function data() {
 				console.log('denied')
 				return;
 			} else {
-				console.log(this)
 				ui.modal.innerHTML = "";
 				var htmlString = '<div class="">';
 				htmlString += '<h3>' + this.title + '</h3>';
@@ -293,7 +292,6 @@ function ui() {
 	};
 
 	this.creatPosterWall = function() {
-		console.log(this);
 		this.posterWall = [];
 		var self = this;
 		var search = function() {
@@ -331,7 +329,6 @@ function ui() {
 			elem.style.height = "150px"; 
 		 	elem.style.position = "absolute";
      		elem.style.left = this.posterWall[j].x +"px";
-     		// console.log(this.posterWall[j].x)
 		    elem.style.top = this.posterWall[j].y +"px";
 		    
 		    elem.addEventListener('click', function(e) {
@@ -346,7 +343,6 @@ function ui() {
 	this.udpdateAnimations = function() {
 		// Slide 2 is active play animation
 		if (this.slide2.parentNode.classList.contains('active')) {
-			console.log('slide 2 active')
 			this.homerAnim.animate();
 		}
 
@@ -368,10 +364,12 @@ function ui() {
 
 		for (var i = 0; i < 4; i ++) {
 			var favButton = document.createElement('div');
+			var spinner = document.createElement('img');
+			spinner.src = "img/gears.svg";
+			spinner.classList.add('spinner');
 			favButton.classList.add('columns', 'large-3', 'small-6', 'favlist', 'nav-link');
 			var htmlString;
 			var favouriteItem = controller.getFavGenre(ui.favButtonArray[i]);
-			// console.log(this.motsFavs[favouriteItem])
 			htmlString = '<div class="wrapper">';
 			htmlString += '<img src="' + this.motsFavs[favouriteItem].pic + '">';
 			htmlString += '<div class="cloak">';
@@ -379,22 +377,33 @@ function ui() {
 			htmlString += '</div></div>';
 
 			favButton.innerHTML = htmlString;
+			favButton.appendChild(spinner);
 
 			this.displayList.appendChild(favButton);
 			favButton.addEventListener('click', function(e) {
 				e.stopPropagation()  // ?????????????? is needed????????
 				var genre = this.firstChild.children[1].firstChild.textContent;
 				controller.buildFavouriteList(genre);
-			}, true); 			
+			}, true);
+			favButton.firstChild.children[0].addEventListener('load', function() {
+				// console.log(this)
+				// console.log(this.parentNode.parentNode)
+
+				var throwawayNode = this.parentNode.parentNode.lastElementChild;
+				// console.log(throwawayNode)
+				throwawayNode.parentNode.removeChild(throwawayNode);
+
+			}) 			
 
 		}
 	};
 
 	this.renderMovieCard = function(movie, genre) {
-		// console.dir(movie);
 			var htmlStr = '';
 			var movieEntry = document.createElement('div');
-
+			var spinner = document.createElement('img');
+			spinner.src = "img/gears.svg";
+			spinner.classList.add('AJAXspinner');
 			movieEntry.classList.add('movie', 'text-center', 'clearfix');
 
 
@@ -413,6 +422,8 @@ function ui() {
 			htmlStr += '</ul>';	
 			htmlStr += '</div>';
 			movieEntry.innerHTML = htmlStr;
+			movieEntry.firstChild.appendChild(spinner);
+			console.log(movieEntry.firstChild.children[0]); ///thats it
 			if(movie.type !== "Stinkers" && movie.type !== "search") {
 				movieEntry.lastChild.lastChild.firstChild.addEventListener('click', function() {
 					movie.modal(movie)
@@ -420,6 +431,12 @@ function ui() {
 			}
 
 			displayList.appendChild(movieEntry);
+			movieEntry.firstChild.children[0].addEventListener('load', function() {
+				console.log(this + ' loaded')
+				var throwawayNode = this.parentNode.lastElementChild;
+				console.log(throwawayNode)
+				throwawayNode.parentNode.removeChild(throwawayNode);	
+			})
 		};
 
 }; //end ui object
@@ -431,11 +448,14 @@ var data = new data(),
 
 controller.init();
 
+
 setInterval(function() {
 
 		ui.udpdateAnimations();
 
 }, 140);
+
+
 
 
 
